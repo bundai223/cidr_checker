@@ -1,6 +1,6 @@
 <template>
-  <div class="cidr2ip">
-    <input v-model='input_cidr' placeholder='ex: 192.168.0.1/31'>
+  <div class="ip_to_cidr">
+    <textarea v-model='input_ips' placeholder='ex: 192.168.0.1/31'></textarea>
     <ul>
       <li
         v-for='ip in ipList'
@@ -12,23 +12,19 @@
 
 <script>
 var CIDR = require('cidr-js')
-var cidrRegex = require('cidr-regex')
 
 export default {
-  name: 'cidr_to_ip',
+  name: 'ip_to_cidr',
   data () {
     return {
-      input_cidr: '',
+      input_ips: '',
       cidr: new CIDR()
     }
   },
 
   computed: {
     ipList () {
-      if (!cidrRegex({exact: true}).test(this.input_cidr)) {
-        return []
-      }
-      return this.cidr.list(this.input_cidr)
+      return this.cidr.list(this.input_ips)
     }
   },
 
