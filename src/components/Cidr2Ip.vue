@@ -3,7 +3,7 @@
     <input v-model='input_cidr' placeholder='ex: 192.168.0.1/31'>
     <ul>
       <li
-        v-for='ip in ipList'
+        v-for='ip in ip_list'
         v-bind:key='ip'
       >{{ip}}</li>
     </ul>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-var CIDR = require('cidr-js')
+var Netmask = require('netmask').Netmask
 var cidrRegex = require('cidr-regex')
 
 export default {
@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       input_cidr: '',
-      cidr: new CIDR()
+      ip_list: []
     }
   },
 
@@ -28,7 +28,13 @@ export default {
       if (!cidrRegex({exact: true}).test(this.input_cidr)) {
         return []
       }
-      return this.cidr.list(this.input_cidr)
+      var block = Netmask(this.input_cidr)
+      var ips = []
+      block.forEach(function (ip, long, index) {
+        ips.push(ip)
+      })
+
+      return ips
     }
   },
 
