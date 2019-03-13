@@ -4,13 +4,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-import store from './store'
+import storeroot from './store'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store(store)
+const store = new Vuex.Store(storeroot)
 
 /* eslint-disable no-new */
 new Vue({
