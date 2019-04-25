@@ -18,6 +18,8 @@
   "dependencies": {
     "cidr-js": "^2.3.1",
     "cidr-regex": "^2.0.10",
+    "lodash": "^4.17.11",
+    "netmask": "^1.0.6",
     "vue": "^2.5.2",
     "vue-analytics": "^5.16.4",
     "vue-router": "^3.0.1",

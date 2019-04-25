@@ -4,6 +4,7 @@ services:
     user: ${UID}:${GID}
     build: .
     command: npm run dev
+    entrypoint: /app/docker-entrypoint.sh
     ports:
       - '8080:8080'
     environment:

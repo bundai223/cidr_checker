@@ -1,6 +1,9 @@
 FROM node:8.14.0-alpine
+ARG UID=1000
+ARG GID=1000
 
-RUN mkdir /app
 WORKDIR /app
 COPY . /app
-RUN npm install
+RUN yarn install && chown -R $UID:$GID /app
+
+USER node

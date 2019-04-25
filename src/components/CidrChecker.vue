@@ -2,7 +2,7 @@
   <div class="CidrChecker">
     <label>mode</label>
     <select v-model='current_mode'>
-      <option v-for='mode in modes' v-bind:value="mode.name">{{mode.jp}}</option>
+      <option v-for='(mode, index) in modes' v-bind:key='index' v-bind:value="mode.name">{{mode.jp}}</option>
     </select>
     <keep-alive>
       <Cidr2Ip v-if='need_ip'/>

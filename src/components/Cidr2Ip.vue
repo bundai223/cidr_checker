@@ -1,9 +1,9 @@
 <template>
   <div class="cidr2ip">
-    <input v-model='input_cidr' placeholder='ex: 192.168.0.1/31'>
+    <input v-model='input_cidr' placeholder='ex: 192.168.0.1/31' v-on:change='cidrChanged'>
     <ul>
       <li
-        v-for='ip in ip_list'
+        v-for='ip in ipList'
         v-bind:key='ip'
       >{{ip}}</li>
     </ul>
@@ -11,34 +11,26 @@
 </template>
 
 <script>
-var Netmask = require('netmask').Netmask
-var cidrRegex = require('cidr-regex')
+import _ from 'lodash'
 
 export default {
   name: 'cidr_to_ip',
   data () {
     return {
-      input_cidr: '',
-      ip_list: []
+      input_cidr: ''
     }
   },
 
   computed: {
     ipList () {
-      if (!cidrRegex({exact: true}).test(this.input_cidr)) {
-        return []
-      }
-      var block = Netmask(this.input_cidr)
-      var ips = []
-      block.forEach(function (ip, long, index) {
-        ips.push(ip)
-      })
-
-      return ips
+      return this.$store.getters.ipList
     }
   },
 
   methods: {
+    cidrChanged: _.debounce(function () {
+      this.$store.dispatch('cidr_to_ip', { cidr: this.input_cidr })
+    }, 500)
   }
 }
 </script>
