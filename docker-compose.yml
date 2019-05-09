@@ -3,7 +3,7 @@ services:
   app:
     user: ${UID}:${GID}
     build: .
-    command: yarn dev
+    command: yarn serve
     entrypoint: /app/docker-entrypoint.sh
     ports:
       - '8080:8080'
