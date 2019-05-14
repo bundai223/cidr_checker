@@ -28,7 +28,7 @@ export default {
         return
       }
       var block = new Netmask(cidr)
-      block.forEach(function (ip, long, index) {
+      block.forEach(function (ip, _, _) {
         _ipList.push(ip)
       })
 

@@ -23,7 +23,7 @@ export default {
 
   computed: {
     ipList () {
-      return this.$store.getters.ipList
+      return this.$store.state.ipList
     }
   },
 
